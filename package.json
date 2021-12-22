@@ -1,14 +1,22 @@
 {
   "name": "note-taker",
   "version": "1.0.0",
-  "description": "",
+  "description": "note taker app",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Brian Done",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4"
-  }
+    "express": "^4.17.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bdoneq7/note-taker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bdoneq7/note-taker/issues"
+  },
+  "homepage": "https://github.com/bdoneq7/note-taker#readme"
 }
