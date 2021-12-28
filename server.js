@@ -9,6 +9,8 @@ const app = express();
 // Get PORT
 const PORT = process.env.PORT || 3001;
 
+
+// filterByQuery Function
 function filterByQuery(query, notesArray) {
   let filteredResults = notesArray;
   if (query.title) {
@@ -18,16 +20,33 @@ function filterByQuery(query, notesArray) {
     filteredResults = filteredResults.filter(note => note.text === query.text);
   }
   return filteredResults;
-}
+};
+
+// findById Function
+function findById(id, notesArray) {
+  const result = notesArray.filter(note => note.id === id)[0];
+  return result;
+};
 
 
-
+// Get Api Route
 app.get('/api/notes', (req, res) => {
   let results = notes;
   if (req.query) {
     results = filterByQuery(req.query, results);
   }
   res.json(results);
+});
+
+// Get api Route by ID
+app.get('/api/notes/:id', (req, res) => {
+  const result = findById(req.params.id, notes);
+  if (result) {
+    res.json(result);
+  } else {
+    res.sendStatus(404);
+  }
+    
 });
 
 
