@@ -2,7 +2,10 @@ const express = require('express');
 
 const app = express();
 
-const { note } = require('./data/db');
+const { notes } = require('./data/db');
+console.log(notes);
+
+const PORT = process.env.PORT || 3001;
 
 
 
@@ -12,10 +15,7 @@ const { note } = require('./data/db');
 
 
 
-app.get('/api/note', (req, res) => {
-    res.send('Note Taker!');
-  });
-
-app.listen(3001, () => {
-    console.log(`API server now on port 3001!`);
-  });
+// Chain the Listen Method onto the Server to make Server Listen
+app.listen(PORT, () => { // Determine localhost Port 
+  console.log(`API server now on port ${PORT}!`);
+});
