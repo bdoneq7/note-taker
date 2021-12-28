@@ -1,57 +1,29 @@
-const { notes } = require('./data/notes');
-
 // Include Express
 const express = require('express');
 
 // Instantiate the Server
 const app = express();
 
-// Get PORT
+// The require() statements will read the index.js files in each of the directories indicated
+// This mechanism works the same way as directory navigation does in a website
+const apiRoutes = require('./routes/apiRoutes');
+const htmlRoutes = require('./routes/htmlRoutes');
+
+// Get PORT 3001 If Available
 const PORT = process.env.PORT || 3001;
 
+// Parse incoming string or array data
+app.use(express.urlencoded({ extended: true }));
+// Parse incoming JSON data
+app.use(express.json());
 
-// filterByQuery Function
-function filterByQuery(query, notesArray) {
-  let filteredResults = notesArray;
-  if (query.title) {
-    filteredResults = filteredResults.filter(note => note.title === query.title);
-  }
-  if (query.text) {
-    filteredResults = filteredResults.filter(note => note.text === query.text);
-  }
-  return filteredResults;
-};
+// Use public folder
+app.use(express.static('public'));
 
-// findById Function
-function findById(id, notesArray) {
-  const result = notesArray.filter(note => note.id === id)[0];
-  return result;
-};
-
-
-// Get Api Route
-app.get('/api/notes', (req, res) => {
-  let results = notes;
-  if (req.query) {
-    results = filterByQuery(req.query, results);
-  }
-  res.json(results);
-});
-
-// Get api Route by ID
-app.get('/api/notes/:id', (req, res) => {
-  const result = findById(req.params.id, notes);
-  if (result) {
-    res.json(result);
-  } else {
-    res.sendStatus(404);
-  }
-    
-});
-
-
-
-
+// Use apiRoutes
+app.use('/api', apiRoutes);
+// Use htmlRoutes
+app.use('/', htmlRoutes);
 
 // Chain the Listen Method onto the Server to make Server Listen
 app.listen(PORT, () => { // Determine localhost Port 

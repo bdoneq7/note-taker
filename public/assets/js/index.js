@@ -1,9 +1,11 @@
+// Declare Variables
 let noteTitle;
 let noteText;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
 
+// Targeting classes on notes.html
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
@@ -25,6 +27,7 @@ const hide = (elem) => {
 // activeNote is used to keep track of the note in the textarea
 let activeNote = {};
 
+// Get Notes Function
 const getNotes = () =>
   fetch('/api/notes', {
     method: 'GET',
@@ -33,15 +36,28 @@ const getNotes = () =>
     },
   });
 
+// Save Note Function
 const saveNote = (note) =>
   fetch('/api/notes', {
     method: 'POST',
     headers: {
+      Accept: 'application/json',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(note),
+  })
+  .then((response) => {
+		if (response.ok) {
+			return response.json();
+		} 
+			alert('Error: ' + response.statusText);
+		})
+    .then(postResponse => {
+      console.log(postResponse);
+      alert('Thank you for adding a Note!');
   });
 
+  // Delete Note Function
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
     method: 'DELETE',
@@ -50,27 +66,29 @@ const deleteNote = (id) =>
     },
   });
 
+ // Render Note Function 
 const renderActiveNote = () => {
   hide(saveNoteBtn);
 
   if (activeNote.id) {
-    noteTitle.setAttribute('readonly', true);
-    noteText.setAttribute('readonly', true);
+    noteTitle.setAttribute('data-id', activeNote.id);
     noteTitle.value = activeNote.title;
     noteText.value = activeNote.text;
   } else {
-    noteTitle.removeAttribute('readonly');
-    noteText.removeAttribute('readonly');
+    noteTitle.removeAttribute('data-id');
     noteTitle.value = '';
     noteText.value = '';
-  }
+}
 };
 
+// Handle Note Save Function
 const handleNoteSave = () => {
-  const newNote = {
-    title: noteTitle.value,
-    text: noteText.value,
-  };
+  
+  // let newNote;
+  // let nodeId = noteTitle.getAttribute('data-id');
+
+   const newNote = {id: noteId, title: noteTitle.value, text: noteText.value,};
+
   saveNote(newNote).then(() => {
     getAndRenderNotes();
     renderActiveNote();
@@ -108,6 +126,7 @@ const handleNewNoteView = (e) => {
   renderActiveNote();
 };
 
+// Turns Save Button On and Off
 const handleRenderSaveBtn = () => {
   if (!noteTitle.value.trim() || !noteText.value.trim()) {
     hide(saveNoteBtn);
