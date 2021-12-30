@@ -38,24 +38,19 @@ const getNotes = () =>
 
 // Save Note Function
 const saveNote = (note) =>
-  fetch('/api/notes', {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(note),
-  })
-  .then((response) => {
+	fetch('/api/notes', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(note),
+	}).then((response) => {
 		if (response.ok) {
 			return response.json();
+		} else {
+			alert('Error: ' + response.statusText); 
 		} 
-			alert('Error: ' + response.statusText);
-		})
-    .then(postResponse => {
-      console.log(postResponse);
-      alert('Thank you for adding a Note!');
-  });
+	});
 
   // Delete Note Function
 const deleteNote = (id) =>
@@ -84,15 +79,25 @@ const renderActiveNote = () => {
 // Handle Note Save Function
 const handleNoteSave = () => {
   
-  // let newNote;
-  // let nodeId = noteTitle.getAttribute('data-id');
+  let noteId = noteTitle.getAttribute('data-id');
+  
+  if (noteId) { 
+      newNote = {
+          title: noteTitle.value,
+          text: noteText.value,
+          id: noteId
+      };
+  } else {
+      newNote = {
+          title: noteTitle.value,
+          text: noteText.value
+      };
+  };
 
-   const newNote = {id: noteId, title: noteTitle.value, text: noteText.value,};
-
-  saveNote(newNote).then(() => {
-    getAndRenderNotes();
-    renderActiveNote();
-  });
+saveNote(newNote).then(() => {
+  getAndRenderNotes();
+  renderActiveNote();
+});
 };
 
 // Delete the clicked note
