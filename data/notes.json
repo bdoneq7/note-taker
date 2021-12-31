@@ -2,53 +2,23 @@
   "notes": [
     {
       "id": "0",
-      "title": "title1",
-      "text": "text1"
+      "title": "Test Note",
+      "text": "This is a Test."
     },
     {
       "id": "1",
-      "title": "title2",
-      "text": "text2"
+      "title": "Eat Breakfast",
+      "text": "Cook Eggs, Sausage, and Waffles"
     },
     {
-      "title": "title3",
-      "text": "text3",
+      "title": "Learn Coding",
+      "text": "Download and learn SQL!",
       "id": "2"
     },
     {
-      "title": "1",
-      "text": "text3",
+      "title": "Create Full Stack App",
+      "text": "Build a Star and Planet Database",
       "id": "3"
-    },
-    {
-      "title": "1",
-      "text": "text3",
-      "id": "4"
-    },
-    {
-      "title": "test",
-      "text": "test",
-      "id": "5"
-    },
-    {
-      "title": "Note Title",
-      "text": "Saved Note Text",
-      "id": "6"
-    },
-    {
-      "title": "New Title",
-      "text": "New Note",
-      "id": "7"
-    },
-    {
-      "title": "Play Games",
-      "text": "Play games with Daddy!",
-      "id": "8"
-    },
-    {
-      "title": "Play Games Saturday",
-      "text": "Play games with Daddy on Saturday and try to pick up a win!",
-      "id": "9"
     }
   ]
 }
