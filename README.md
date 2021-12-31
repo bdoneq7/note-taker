@@ -19,7 +19,7 @@ To allow a user to write and save notes to organize their thoughts, and keep tra
 * [Questions](#questions)
 
 ## Screenshot
-![Alt Brian Done Note Taker Screenshot](https://github.com/bdoneq7/note-taker/blob/main/assets/images/screenshot.PNG?raw=true "Brian Done Note Taker Screenshot")
+![Alt Brian Done Note Taker Screenshot](https://github.com/bdoneq7/note-taker/blob/main/public/assets/images/screenshot.PNG?raw=true "Brian Done Note Taker Screenshot")
 
 ## Installation 
 Please clone the repo to your local machine, install node, express, and jest.
